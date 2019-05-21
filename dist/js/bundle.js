@@ -1572,10 +1572,7 @@ var calc = function calc() {
       total = 0;
   totalValue.innerHTML = 0;
   persons.addEventListener('input', function () {
-    if (!validInput(this.value)) {
-      this.value = this.value.slice(0, -1);
-    }
-
+    this.value = this.value.replace(/^[0]{1}/, '');
     personsSum = +this.value;
 
     if (personsSum > 0 && daysSum > 0) {
@@ -1586,10 +1583,7 @@ var calc = function calc() {
     }
   });
   restDays.addEventListener('input', function () {
-    if (!validInput(this.value)) {
-      this.value = this.value.slice(0, -1);
-    }
-
+    this.value = this.value.replace(/^[0]{1}/, '');
     daysSum = +this.value;
 
     if (personsSum > 0 && daysSum > 0) {
@@ -1607,10 +1601,6 @@ var calc = function calc() {
       totalValue.innerHTML = a * this.options[this.selectedIndex].value;
     }
   });
-
-  function validInput(elem) {
-    return /\d$/.test(elem);
-  }
 };
 
 module.exports = calc;
@@ -1624,8 +1614,6 @@ module.exports = calc;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-var _this = this;
-
 var modal = function modal() {
   var more = document.querySelector('.more'),
       overlay = document.querySelector('.overlay'),
@@ -1636,9 +1624,7 @@ var modal = function modal() {
   var modal = function modal(btn) {
     btn.addEventListener('click', function () {
       overlay.style.display = 'block';
-
-      _this.classList.add('more-splash');
-
+      this.classList.add('more-splash');
       document.body.style.overflow = 'hidden';
     });
     close.addEventListener('click', function () {
@@ -1659,67 +1645,6 @@ module.exports = modal;
 
 /***/ }),
 
-/***/ "./src/js/parts/scroll.js":
-/*!********************************!*\
-  !*** ./src/js/parts/scroll.js ***!
-  \********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var scroll = function scroll() {
-  var navMenu = document.body.getElementsByTagName('nav')[0],
-      navLinks = navMenu.getElementsByTagName('a');
-  var sections = [document.getElementById('about'), document.getElementById('photo'), document.getElementById('price'), document.getElementById('contacts')];
-  navMenu.addEventListener('click', function (event) {
-    if (event.target.tagName === 'A') {
-      evt.preventDefault();
-
-      for (var i = 0; i < navLinks.length; i++) {
-        if (event.target === navLinks[i]) {
-          scrollToElement(sections[i]);
-        }
-      }
-    }
-  });
-
-  function scrollToElement(nodeElement) {
-    var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 250;
-    var currPos = document.documentElement.scrollTop,
-        elementPos = nodeElement.getBoundingClientRect().top - navMenu.clientHeight,
-        targetPos = currPos + elementPos;
-    var animationID,
-        step = targetPos / duration;
-    shiftPos();
-
-    function shiftPos(pastTime) {
-      if (elementPos > 0) {
-        currPos += step;
-
-        if (currPos - targetPos > 0) {
-          currPos = targetPos;
-        }
-      } else {
-        currPos -= step;
-
-        if (currPos - targetPos < 0) {
-          currPos = targetPos;
-        }
-      }
-
-      scrollTo(0, currPos);
-      animationID = requestAnimationFrame(shiftPos);
-
-      if (currPos === targetPos) {
-        cancelAnimationFrame(animationID);
-      }
-    }
-  }
-};
-
-module.exports = scroll;
-
-/***/ }),
-
 /***/ "./src/js/parts/sendform.js":
 /*!**********************************!*\
   !*** ./src/js/parts/sendform.js ***!
@@ -1735,9 +1660,7 @@ var sendform = function sendform() {
     success: "<img src=\"src/img/checked.png\" class=\"status__img\"><span class=\"status__message\">\u0412 \u0431\u043B\u0438\u0436\u0430\u0439\u0448\u0435\u0435 \u0432\u0440\u0435\u043C\u044F \u043C\u044B \u0441 \u0432\u0430\u043C\u0438 \u0441\u0432\u044F\u0436\u0435\u043C\u0441\u044F</span>",
     failure: "<img src=\"src/img/warning.png\" class=\"status__img\"><span class=\"status__message\">\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0434\u0430\u043D\u043D\u044B\u0435 \u0441\u043D\u043E\u0432\u0430</span>"
   };
-  var form = document.querySelector('.main-form'),
-      input = form.getElementsByTagName('input'),
-      statusMessage = document.createElement('div'),
+  var statusMessage = document.createElement('div'),
       myPhone = document.querySelectorAll('input[type="tel"]');
 
   var _loop = function _loop(i) {
@@ -1756,10 +1679,11 @@ var sendform = function sendform() {
   document.body.addEventListener('submit', function (event) {
     var target = event.target;
     event.preventDefault();
+    var input = target.getElementsByTagName('input');
     target.appendChild(statusMessage);
     var formData = new FormData(target);
 
-    function postData(data) {
+    var postData = function postData(data) {
       return new _Promise(function (resolve, reject) {
         var request = new XMLHttpRequest();
         request.open('POST', 'server.php');
@@ -1779,7 +1703,7 @@ var sendform = function sendform() {
 
         request.send(data);
       });
-    }
+    };
 
     var clearInput = function clearInput() {
       for (var i = 0; i < input.length; i++) {
@@ -1793,7 +1717,7 @@ var sendform = function sendform() {
       statusMessage.innerHTML = message.success;
     }).catch(function () {
       return statusMessage.innerHTML = message.failure;
-    }).then(clearInput());
+    }).then(clearInput);
   });
 };
 
@@ -1858,10 +1782,6 @@ var slider = function slider() {
       }
     }
   });
-
-  var sliderAnimate = function sliderAnimate() {
-    slides.css.style.transform = 'rotateY(45deg)';
-  };
 };
 
 module.exports = slider;
@@ -1988,8 +1908,7 @@ window.addEventListener('DOMContentLoaded', function () {
       modal = __webpack_require__(/*! ./parts/modal.js */ "./src/js/parts/modal.js"),
       sendform = __webpack_require__(/*! ./parts/sendform.js */ "./src/js/parts/sendform.js"),
       slider = __webpack_require__(/*! ./parts/slider.js */ "./src/js/parts/slider.js"),
-      calc = __webpack_require__(/*! ./parts/calc.js */ "./src/js/parts/calc.js"),
-      scroll = __webpack_require__(/*! ./parts/scroll.js */ "./src/js/parts/scroll.js");
+      calc = __webpack_require__(/*! ./parts/calc.js */ "./src/js/parts/calc.js");
 
   tabs();
   timer();
@@ -1997,7 +1916,6 @@ window.addEventListener('DOMContentLoaded', function () {
   sendform();
   slider();
   calc();
-  scroll();
 });
 
 /***/ })
