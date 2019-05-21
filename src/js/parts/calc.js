@@ -12,9 +12,7 @@ const calc = () => {
 
     persons.addEventListener('input', function() {
 
-        if (!(validInput(this.value))) {
-            this.value = this.value.slice(0, -1);
-        }
+        this.value = this.value.replace(/^[0]{1}/, '');
 
         personsSum = +this.value;
 
@@ -28,9 +26,7 @@ const calc = () => {
 
     restDays.addEventListener('input', function() {
 
-        if (!(validInput(this.value))) {
-            this.value = this.value.slice(0, -1);
-        }
+        this.value = this.value.replace(/^[0]{1}/, '');
 
         daysSum = +this.value;
 
@@ -50,11 +46,7 @@ const calc = () => {
             totalValue.innerHTML = a * this.options[this.selectedIndex].value;
         }
     });
-
-
-    function validInput(elem) {
-        return /\d$/.test(elem);
-    }
+    
 }
 
 module.exports = calc;

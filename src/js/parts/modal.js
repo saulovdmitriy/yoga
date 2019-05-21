@@ -1,14 +1,13 @@
 const modal = () => {
     let more = document.querySelector ('.more'),
-    overlay = document.querySelector ('.overlay'),
-    close = document.querySelector ('.popup-close'),
-    descTab = document.querySelectorAll ('.description'),
-    descBtn = document.querySelectorAll ('.description-btn');
-
+        overlay = document.querySelector ('.overlay'),
+        close = document.querySelector ('.popup-close'),
+        descTab = document.querySelectorAll ('.description'),
+        descBtn = document.querySelectorAll ('.description-btn');
 
     const modal = (btn) => {
 
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', () => {
 
             overlay.style.display = 'block';
             this.classList.add('more-splash');
@@ -16,7 +15,7 @@ const modal = () => {
 
         });
 
-        close.addEventListener('click', function() {
+        close.addEventListener('click', () => {
 
             overlay.style.display = 'none';
             more.classList.remove('more-splash');

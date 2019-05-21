@@ -1624,6 +1624,8 @@ module.exports = calc;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+var _this = this;
+
 var modal = function modal() {
   var more = document.querySelector('.more'),
       overlay = document.querySelector('.overlay'),
@@ -1634,7 +1636,9 @@ var modal = function modal() {
   var modal = function modal(btn) {
     btn.addEventListener('click', function () {
       overlay.style.display = 'block';
-      this.classList.add('more-splash');
+
+      _this.classList.add('more-splash');
+
       document.body.style.overflow = 'hidden';
     });
     close.addEventListener('click', function () {
@@ -1652,6 +1656,67 @@ var modal = function modal() {
 };
 
 module.exports = modal;
+
+/***/ }),
+
+/***/ "./src/js/parts/scroll.js":
+/*!********************************!*\
+  !*** ./src/js/parts/scroll.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var scroll = function scroll() {
+  var navMenu = document.body.getElementsByTagName('nav')[0],
+      navLinks = navMenu.getElementsByTagName('a');
+  var sections = [document.getElementById('about'), document.getElementById('photo'), document.getElementById('price'), document.getElementById('contacts')];
+  navMenu.addEventListener('click', function (event) {
+    if (event.target.tagName === 'A') {
+      evt.preventDefault();
+
+      for (var i = 0; i < navLinks.length; i++) {
+        if (event.target === navLinks[i]) {
+          scrollToElement(sections[i]);
+        }
+      }
+    }
+  });
+
+  function scrollToElement(nodeElement) {
+    var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 250;
+    var currPos = document.documentElement.scrollTop,
+        elementPos = nodeElement.getBoundingClientRect().top - navMenu.clientHeight,
+        targetPos = currPos + elementPos;
+    var animationID,
+        step = targetPos / duration;
+    shiftPos();
+
+    function shiftPos(pastTime) {
+      if (elementPos > 0) {
+        currPos += step;
+
+        if (currPos - targetPos > 0) {
+          currPos = targetPos;
+        }
+      } else {
+        currPos -= step;
+
+        if (currPos - targetPos < 0) {
+          currPos = targetPos;
+        }
+      }
+
+      scrollTo(0, currPos);
+      animationID = requestAnimationFrame(shiftPos);
+
+      if (currPos === targetPos) {
+        cancelAnimationFrame(animationID);
+      }
+    }
+  }
+};
+
+module.exports = scroll;
 
 /***/ }),
 
@@ -1923,7 +1988,8 @@ window.addEventListener('DOMContentLoaded', function () {
       modal = __webpack_require__(/*! ./parts/modal.js */ "./src/js/parts/modal.js"),
       sendform = __webpack_require__(/*! ./parts/sendform.js */ "./src/js/parts/sendform.js"),
       slider = __webpack_require__(/*! ./parts/slider.js */ "./src/js/parts/slider.js"),
-      calc = __webpack_require__(/*! ./parts/calc.js */ "./src/js/parts/calc.js");
+      calc = __webpack_require__(/*! ./parts/calc.js */ "./src/js/parts/calc.js"),
+      scroll = __webpack_require__(/*! ./parts/scroll.js */ "./src/js/parts/scroll.js");
 
   tabs();
   timer();
@@ -1931,6 +1997,7 @@ window.addEventListener('DOMContentLoaded', function () {
   sendform();
   slider();
   calc();
+  scroll();
 });
 
 /***/ })

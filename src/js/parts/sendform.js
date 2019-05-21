@@ -6,9 +6,7 @@ const sendform = () => {
         failure: `<img src="src/img/warning.png" class="status__img"><span class="status__message">Введите данные снова</span>`
     };
 
-    let form = document.querySelector('.main-form'),
-        input = form.getElementsByTagName('input'),
-        statusMessage = document.createElement('div'),
+    let statusMessage = document.createElement('div'),
         myPhone = document.querySelectorAll('input[type="tel"]');
 
     for (let i = 0; i < myPhone.length; i++) {
@@ -25,14 +23,16 @@ const sendform = () => {
 
     document.body.addEventListener('submit', (event) => {
         let target = event.target;
-        event.preventDefault(); 
+        event.preventDefault();
+        
+        let input = target.getElementsByTagName('input');
         target.appendChild(statusMessage);
 
         let formData = new FormData(target);
 
-        function postData(data) {
+        const postData = (data) => {
 
-            return new Promise(function(resolve, reject) {
+            return new Promise((resolve, reject) => {
                 let request = new XMLHttpRequest();
 
                 request.open('POST', 'server.php');
@@ -65,7 +65,7 @@ const sendform = () => {
             .then(() => {statusMessage.innerHTML = message.loading})
             .then(() => {statusMessage.innerHTML = message.success;})
             .catch(() => statusMessage.innerHTML = message.failure)
-            .then(clearInput());
+            .then(clearInput);
 
     });
 }
