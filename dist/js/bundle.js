@@ -1631,7 +1631,7 @@ var modal = function modal() {
       descTab = document.querySelectorAll('.description'),
       descBtn = document.querySelectorAll('.description-btn');
 
-  function modal(btn) {
+  var modal = function modal(btn) {
     btn.addEventListener('click', function () {
       overlay.style.display = 'block';
       this.classList.add('more-splash');
@@ -1642,7 +1642,7 @@ var modal = function modal() {
       more.classList.remove('more-splash');
       document.body.style.overflow = '';
     });
-  }
+  };
 
   modal(more); //Добавляю функцию открытия окна на каждую кнопку "Подробнее"
 
@@ -1666,9 +1666,9 @@ var _Promise = typeof Promise === 'undefined' ? __webpack_require__(/*! es6-prom
 
 var sendform = function sendform() {
   var message = {
-    loading: "<img src=\"img/ajax-loader.gif\" class=\"status__img\">",
-    success: "<img src=\"img/checked.png\" class=\"status__img\"><span class=\"status__message\">\u0412 \u0431\u043B\u0438\u0436\u0430\u0439\u0448\u0435\u0435 \u0432\u0440\u0435\u043C\u044F \u043C\u044B \u0441 \u0432\u0430\u043C\u0438 \u0441\u0432\u044F\u0436\u0435\u043C\u0441\u044F</span>",
-    failure: "<img src=\"img/warning.png\" class=\"status__img\"><span class=\"status__message\">\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0434\u0430\u043D\u043D\u044B\u0435 \u0441\u043D\u043E\u0432\u0430</span>"
+    loading: "<img src=\"src/img/ajax-loader.gif\" class=\"status__img\">",
+    success: "<img src=\"src/img/checked.png\" class=\"status__img\"><span class=\"status__message\">\u0412 \u0431\u043B\u0438\u0436\u0430\u0439\u0448\u0435\u0435 \u0432\u0440\u0435\u043C\u044F \u043C\u044B \u0441 \u0432\u0430\u043C\u0438 \u0441\u0432\u044F\u0436\u0435\u043C\u0441\u044F</span>",
+    failure: "<img src=\"src/img/warning.png\" class=\"status__img\"><span class=\"status__message\">\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0434\u0430\u043D\u043D\u044B\u0435 \u0441\u043D\u043E\u0432\u0430</span>"
   };
   var form = document.querySelector('.main-form'),
       input = form.getElementsByTagName('input'),
@@ -1680,15 +1680,12 @@ var sendform = function sendform() {
       if (!/^\+?[()\d \-]*$/.test(myPhone[i].value)) {
         this.value = this.value.slice(0, -1);
       }
-
-      console.log(/^\+?[()\d \-]*$/.test(myPhone[i].value));
     });
   };
 
   for (var i = 0; i < myPhone.length; i++) {
     _loop(i);
-  } // !(/^(\+|\d)|\d/g
-
+  }
 
   statusMessage.classList.add('status');
   document.body.addEventListener('submit', function (event) {
@@ -1719,11 +1716,11 @@ var sendform = function sendform() {
       });
     }
 
-    function clearInput() {
+    var clearInput = function clearInput() {
       for (var i = 0; i < input.length; i++) {
         input[i].value = '';
       }
-    }
+    };
 
     postData(formData).then(function () {
       statusMessage.innerHTML = message.loading;
@@ -1731,7 +1728,7 @@ var sendform = function sendform() {
       statusMessage.innerHTML = message.success;
     }).catch(function () {
       return statusMessage.innerHTML = message.failure;
-    }).then(clearInput);
+    }).then(clearInput());
   });
 };
 
@@ -1776,6 +1773,7 @@ var slider = function slider() {
 
   var plusSlides = function plusSlides(n) {
     showSlides(slideIndex += n);
+    sliderAnimate();
   };
 
   var currentSlide = function currentSlide(n) {
@@ -1795,6 +1793,10 @@ var slider = function slider() {
       }
     }
   });
+
+  var sliderAnimate = function sliderAnimate() {
+    slides.css.style.transform = 'rotateY(45deg)';
+  };
 };
 
 module.exports = slider;

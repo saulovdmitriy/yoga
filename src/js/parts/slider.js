@@ -27,17 +27,18 @@ const slider = () => {
 
     const plusSlides = (n) => {
         showSlides(slideIndex += n);
+        sliderAnimate();
     }
 
     const currentSlide = (n) => {
         showSlides(slideIndex = n);
     }
 
-    prev.addEventListener('click', function() {
+    prev.addEventListener('click', () => {
         plusSlides(-1);
     });
 
-    next.addEventListener('click', function() {
+    next.addEventListener('click', () => {
         plusSlides(1);
     });
 
@@ -48,6 +49,10 @@ const slider = () => {
             }
         }
     });
+
+    const sliderAnimate = () => {
+        slides.css.style.transform = 'rotateY(45deg)';
+    }
 }
 
 module.exports = slider;

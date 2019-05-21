@@ -6,7 +6,7 @@ const modal = () => {
     descBtn = document.querySelectorAll ('.description-btn');
 
 
-    function modal(btn) {
+    const modal = (btn) => {
 
         btn.addEventListener('click', function() {
 

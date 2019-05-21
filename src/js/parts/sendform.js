@@ -1,9 +1,9 @@
 const sendform = () => {
 
     let message = {
-        loading: `<img src="img/ajax-loader.gif" class="status__img">`,
-        success: `<img src="img/checked.png" class="status__img"><span class="status__message">В ближайшее время мы с вами свяжемся</span>`,
-        failure: `<img src="img/warning.png" class="status__img"><span class="status__message">Введите данные снова</span>`
+        loading: `<img src="src/img/ajax-loader.gif" class="status__img">`,
+        success: `<img src="src/img/checked.png" class="status__img"><span class="status__message">В ближайшее время мы с вами свяжемся</span>`,
+        failure: `<img src="src/img/warning.png" class="status__img"><span class="status__message">Введите данные снова</span>`
     };
 
     let form = document.querySelector('.main-form'),
@@ -17,14 +17,9 @@ const sendform = () => {
             if (!(/^\+?[()\d \-]*$/.test(myPhone[i].value))) {
                 this.value = this.value.slice(0, -1);
             }
-
-            console.log(/^\+?[()\d \-]*$/.test(myPhone[i].value));
             
         });
-        
     }
-
-    // !(/^(\+|\d)|\d/g
 
     statusMessage.classList.add('status');
 
@@ -44,7 +39,7 @@ const sendform = () => {
                 
                 request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-                request.onreadystatechange = function() {
+                request.onreadystatechange = () => {
                     if (request.readyState < 4) {
                         resolve();
                     } else if (request.readystate === 4) {
@@ -60,7 +55,7 @@ const sendform = () => {
             });
         }
 
-        function clearInput() {
+        const clearInput = () => {
             for (let i = 0; i < input.length; i++) {
                 input[i].value = '';
             }
@@ -70,7 +65,7 @@ const sendform = () => {
             .then(() => {statusMessage.innerHTML = message.loading})
             .then(() => {statusMessage.innerHTML = message.success;})
             .catch(() => statusMessage.innerHTML = message.failure)
-            .then(clearInput);
+            .then(clearInput());
 
     });
 }
