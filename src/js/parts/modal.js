@@ -1,9 +1,10 @@
 const modal = () => {
     let more = document.querySelector ('.more'),
-        overlay = document.querySelector ('.overlay'),
-        close = document.querySelector ('.popup-close'),
-        descTab = document.querySelectorAll ('.description'),
-        descBtn = document.querySelectorAll ('.description-btn');
+    overlay = document.querySelector ('.overlay'),
+    close = document.querySelector ('.popup-close'),
+    descTab = document.querySelectorAll ('.description'),
+    descBtn = document.querySelectorAll ('.description-btn');
+
 
     const modal = (btn) => {
 
