@@ -8,7 +8,7 @@ const modal = () => {
 
     const modal = (btn) => {
 
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', function() {
 
             overlay.style.display = 'block';
             this.classList.add('more-splash');
@@ -16,7 +16,7 @@ const modal = () => {
 
         });
 
-        close.addEventListener('click', () => {
+        close.addEventListener('click', function() {
 
             overlay.style.display = 'none';
             more.classList.remove('more-splash');

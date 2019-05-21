@@ -49,10 +49,6 @@ const slider = () => {
             }
         }
     });
-
-    const sliderAnimate = () => {
-        slides.css.style.transform = 'rotateY(45deg)';
-    }
 }
 
 module.exports = slider;
