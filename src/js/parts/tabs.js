@@ -1,9 +1,9 @@
-function tabs() {
+const tabs = () => {
     let info = document.querySelector ('.info-header'),
         tab = document.querySelectorAll ('.info-header-tab'),
         tabContent = document.querySelectorAll ('.info-tabcontent');
 
-    function hideContentTab(a) {
+    const hideContentTab = (a) => {
         for (let i = a; i < tabContent.length; i++) {
             tabContent[i].classList.remove('show');
             tabContent[i].classList.add('hide');
@@ -11,7 +11,7 @@ function tabs() {
     }
     hideContentTab(1);
 
-    function showContentTab(b) {
+    const showContentTab = (b) => {
         for (let i = b; i < tabContent.length; i++) {
             tabContent[b].classList.remove('hide');
             tabContent[b].classList.add('show');

@@ -1,4 +1,4 @@
-function sendform() {
+const sendform = () => {
 
     let message = {
         loading: `<img src="img/ajax-loader.gif" class="status__img">`,

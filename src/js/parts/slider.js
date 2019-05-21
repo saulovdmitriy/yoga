@@ -1,4 +1,4 @@
-function slider() {
+const slider = () => {
     let slideIndex = 1,
         slides = document.querySelectorAll('.slider-item'),
         prev = document.querySelector('.prev'),
@@ -25,11 +25,11 @@ function slider() {
         dots[slideIndex - 1].classList.add('dot-active');
     }
 
-    function plusSlides(n) {
+    const plusSlides = (n) => {
         showSlides(slideIndex += n);
     }
 
-    function currentSlide(n) {
+    const currentSlide = (n) => {
         showSlides(slideIndex = n);
     }
 
@@ -41,7 +41,7 @@ function slider() {
         plusSlides(1);
     });
 
-    dotsWrap.addEventListener('click', function(event) {
+    dotsWrap.addEventListener('click', (event) => {
         for (let i = 0; i < dots.length + 1; i++) {
             if (event.target.classList.contains('dot') && event.target == dots[i-1]) {
                 currentSlide(i);

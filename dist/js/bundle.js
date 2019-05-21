@@ -1562,7 +1562,7 @@ module.exports = g;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function calc() {
+var calc = function calc() {
   var persons = document.querySelectorAll('.counter-block-input')[0],
       restDays = document.querySelectorAll('.counter-block-input')[1],
       place = document.getElementById('select'),
@@ -1611,7 +1611,7 @@ function calc() {
   function validInput(elem) {
     return /\d$/.test(elem);
   }
-}
+};
 
 module.exports = calc;
 
@@ -1624,7 +1624,7 @@ module.exports = calc;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function modal() {
+var modal = function modal() {
   var more = document.querySelector('.more'),
       overlay = document.querySelector('.overlay'),
       close = document.querySelector('.popup-close'),
@@ -1649,7 +1649,7 @@ function modal() {
   for (var i = 0; i < descTab.length; i++) {
     modal(descBtn[i]);
   }
-}
+};
 
 module.exports = modal;
 
@@ -1664,7 +1664,7 @@ module.exports = modal;
 
 var _Promise = typeof Promise === 'undefined' ? __webpack_require__(/*! es6-promise */ "./node_modules/es6-promise/dist/es6-promise.js").Promise : Promise;
 
-function sendform() {
+var sendform = function sendform() {
   var message = {
     loading: "<img src=\"img/ajax-loader.gif\" class=\"status__img\">",
     success: "<img src=\"img/checked.png\" class=\"status__img\"><span class=\"status__message\">\u0412 \u0431\u043B\u0438\u0436\u0430\u0439\u0448\u0435\u0435 \u0432\u0440\u0435\u043C\u044F \u043C\u044B \u0441 \u0432\u0430\u043C\u0438 \u0441\u0432\u044F\u0436\u0435\u043C\u0441\u044F</span>",
@@ -1733,7 +1733,7 @@ function sendform() {
       return statusMessage.innerHTML = message.failure;
     }).then(clearInput);
   });
-}
+};
 
 module.exports = sendform;
 
@@ -1746,7 +1746,7 @@ module.exports = sendform;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function slider() {
+var slider = function slider() {
   var slideIndex = 1,
       slides = document.querySelectorAll('.slider-item'),
       prev = document.querySelector('.prev'),
@@ -1774,13 +1774,13 @@ function slider() {
     dots[slideIndex - 1].classList.add('dot-active');
   }
 
-  function plusSlides(n) {
+  var plusSlides = function plusSlides(n) {
     showSlides(slideIndex += n);
-  }
+  };
 
-  function currentSlide(n) {
+  var currentSlide = function currentSlide(n) {
     showSlides(slideIndex = n);
-  }
+  };
 
   prev.addEventListener('click', function () {
     plusSlides(-1);
@@ -1795,7 +1795,7 @@ function slider() {
       }
     }
   });
-}
+};
 
 module.exports = slider;
 
@@ -1808,26 +1808,26 @@ module.exports = slider;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function tabs() {
+var tabs = function tabs() {
   var info = document.querySelector('.info-header'),
       tab = document.querySelectorAll('.info-header-tab'),
       tabContent = document.querySelectorAll('.info-tabcontent');
 
-  function hideContentTab(a) {
+  var hideContentTab = function hideContentTab(a) {
     for (var i = a; i < tabContent.length; i++) {
       tabContent[i].classList.remove('show');
       tabContent[i].classList.add('hide');
     }
-  }
+  };
 
   hideContentTab(1);
 
-  function showContentTab(b) {
+  var showContentTab = function showContentTab(b) {
     for (var i = b; i < tabContent.length; i++) {
       tabContent[b].classList.remove('hide');
       tabContent[b].classList.add('show');
     }
-  }
+  };
 
   info.addEventListener('click', function (event) {
     var target = event.target;
@@ -1842,7 +1842,7 @@ function tabs() {
       }
     }
   });
-}
+};
 
 module.exports = tabs;
 
@@ -1855,10 +1855,10 @@ module.exports = tabs;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function timer() {
-  var deadline = '2019-05-15';
+var timer = function timer() {
+  var deadline = '2019-05-23';
 
-  function getTimeRemaining(endtime) {
+  var getTimeRemaining = function getTimeRemaining(endtime) {
     var t = Date.parse(endtime) - Date.parse(new Date()),
         seconds = Math.floor(t / 1000 % 60),
         minutes = Math.floor(t / 1000 / 60 % 60),
@@ -1869,9 +1869,9 @@ function timer() {
       'minutes': minutes,
       'seconds': seconds
     };
-  }
+  };
 
-  function setClock(id, endtime) {
+  var setClock = function setClock(id, endtime) {
     var timer = document.getElementById(id),
         hours = timer.querySelector('.hours'),
         minutes = timer.querySelector('.minutes'),
@@ -1892,10 +1892,10 @@ function timer() {
         seconds.textContent = zero;
       }
     }
-  }
+  };
 
   setClock('timer', deadline);
-}
+};
 
 module.exports = timer;
 
